@@ -17,8 +17,13 @@ app.use(session({
 }));
 
 // --- CLEAN URL ROUTES ---
+// --- CLEAN URL ROUTES ---
 app.get('/', (req, res) => {
-    res.redirect('/login');
+    res.sendFile(path.join(__dirname, 'public', 'home.html')); // NOW GOES TO HOME PAGE
+});
+
+app.get('/home', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'home.html'));
 });
 
 app.get('/login', (req, res) => {
