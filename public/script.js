@@ -1,6 +1,5 @@
 let selectedPack = null;
 
-// REGISTRATION
 async function register() {
     const username = document.getElementById('regUser').value;
     const email = document.getElementById('regEmail').value;
@@ -22,13 +21,12 @@ async function register() {
     const data = await response.json();
     if (data.success) {
         alert("Registration successful! Please login.");
-        window.location.href = 'login.html';
+        window.location.href = '/login';
     } else {
         errorEl.innerText = data.message;
     }
 }
 
-// LOGIN
 async function login() {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
@@ -42,13 +40,12 @@ async function login() {
 
     const data = await response.json();
     if (data.success) {
-        window.location.href = 'index.html';
+        window.location.href = '/shop';
     } else {
         errorEl.innerText = data.message;
     }
 }
 
-// TOP-UP
 function selectPack(name, price, element) {
     selectedPack = { name, price };
     document.querySelectorAll('.pack-card').forEach(card => card.classList.remove('selected'));
@@ -65,16 +62,15 @@ async function processPayment() {
         body: JSON.stringify({ gameId, pack: selectedPack })
     });
 
-    if (response.status === 401) return window.location.href = 'login.html';
+    if (response.status === 401) return window.location.href = '/login';
     
     const data = await response.json();
     if (data.success) window.location.href = `success.html?id=${data.orderId}`;
 }
 
-// DASHBOARD
 async function loadOrders() {
     const response = await fetch('/api/orders');
-    if (response.status === 401) return window.location.href = 'login.html';
+    if (response.status === 401) return window.location.href = '/login';
     
     const orders = await response.json();
     const tbody = document.querySelector('#orderTable tbody');
