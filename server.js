@@ -10,6 +10,26 @@ const PORT = 3000;
 
 app.use(bodyParser.json());
 app.use(express.static('public'));
+// Clean URLs
+app.get('/', (req, res) => {
+    res.redirect('/login'); // Redirect home page to login
+});
+
+app.get('/login', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'login.html'));
+});
+
+app.get('/register', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'register.html'));
+});
+
+app.get('/shop', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+app.get('/dashboard', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'dashboard.html'));
+});
 app.use(session({
     secret: 'super-secret-gaming-key',
     resave: false,
