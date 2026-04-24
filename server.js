@@ -10,9 +10,15 @@ const PORT = 3000;
 
 app.use(bodyParser.json());
 app.use(express.static('public'));
-// Clean URLs
+app.use(session({
+    secret: 'super-secret-gaming-key',
+    resave: false,
+    saveUninitialized: true
+}));
+
+// --- CLEAN URL ROUTES ---
 app.get('/', (req, res) => {
-    res.redirect('/login'); // Redirect home page to login
+    res.redirect('/login');
 });
 
 app.get('/login', (req, res) => {
@@ -30,11 +36,6 @@ app.get('/shop', (req, res) => {
 app.get('/dashboard', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'dashboard.html'));
 });
-app.use(session({
-    secret: 'super-secret-gaming-key',
-    resave: false,
-    saveUninitialized: true
-}));
 
 // Middleware to protect routes
 const checkAuth = (req, res, next) => {
@@ -42,9 +43,7 @@ const checkAuth = (req, res, next) => {
     else res.status(401).json({ success: false, message: "Please login first!" });
 };
 
-// --- AUTH ROUTES ---
-
-// Registration
+// Auth Routes
 app.post('/api/register', async (req, res) => {
     const { username, email, password } = req.body;
     try {
@@ -57,7 +56,6 @@ app.post('/api/register', async (req, res) => {
     } catch (e) { res.status(500).json({ success: false, message: "Server error" }); }
 });
 
-// Login
 app.post('/api/login', (req, res) => {
     const { username, password } = req.body;
     db.get(`SELECT * FROM users WHERE username = ?`, [username], async (err, user) => {
@@ -72,15 +70,13 @@ app.post('/api/login', (req, res) => {
 
 app.get('/api/logout', (req, res) => {
     req.session.destroy();
-    res.redirect('/login.html');
+    res.redirect('/login');
 });
 
-// --- GAME ROUTES ---
-
+// Game Routes
 app.post('/api/topup', checkAuth, (req, res) => {
     const { gameId, pack } = req.body;
     const userId = req.session.user.id;
-
     db.run(`INSERT INTO orders (userId, gameId, packName, amount, status) VALUES (?, ?, ?, ?, ?)`, 
         [userId, gameId, pack.name, pack.price, 'Completed'], function(err) {
         if (err) return res.status(500).json({ success: false, message: "DB Error" });
@@ -88,7 +84,6 @@ app.post('/api/topup', checkAuth, (req, res) => {
     });
 });
 
-// Get User Order History
 app.get('/api/orders', checkAuth, (req, res) => {
     const userId = req.session.user.id;
     db.all(`SELECT * FROM orders WHERE userId = ? ORDER BY timestamp DESC`, [userId], (err, rows) => {
