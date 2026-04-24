@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameShop | Top-Up</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🎮 Game Top-Up Shop</h1>
+        <p>Enter your details to recharge your account</p>
+
+        <div class="input-group">
+            <label>Game ID</label>
+            <input type="text" id="gameId" placeholder="Enter Game ID (e.g. 12345678)">
+        </div>
+
+        <h3>Select a Pack</h3>
+        <div class="pack-grid">
+            <div class="pack-card" onclick="selectPack('100 Diamonds', 0.99, this)">
+                <h4>100 Diamonds</h4>
+                <p>$0.99</p>
+            </div>
+            <div class="pack-card" onclick="selectPack('500 Diamonds', 4.50, this)">
+                <h4>500 Diamonds</h4>
+                <p>$4.50</p>
+            </div>
+            <div class="pack-card" onclick="selectPack('1000 Diamonds', 8.00, this)">
+                <h4>1000 Diamonds</h4>
+                <p>$8.00</p>
+            </div>
+            <div class="pack-card" onclick="selectPack('500 UC', 5.00, this)">
+                <h4>500 UC</h4>
+                <p>$5.00</p>
+            </div>
+        </div>
+
+        <button id="buyBtn" onclick="processPayment()">Buy Now</button>
+        <div id="loader" class="hidden">Processing Payment... Please wait...</div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
