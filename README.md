@@ -1,40 +1,17 @@
-\# 🎮 Game Top-Up Website
+# 🎮 Game Top-Up Digital Store
 
+A professional full-stack digital recharge platform that allows users to purchase in-game currency securely.
 
+## 🚀 Live Demo
+**Link:** [Your-Render-Link-Here.onrender.com]
 
-A full-stack digital recharge platform where users can purchase in-game currency using a seamless interface.
+## ✨ Features
+- **Secure Authentication:** User registration and login using `bcrypt` password hashing.
+- **Session Management:** Protected routes for the Shop and User Dashboard using `express-session`.
+- **Order Tracking:** Relational database integration to store and display user purchase history.
+- **Modern UI:** A responsive, gamer-themed dark interface built with HTML5, CSS3, and JavaScript.
+- **Clean URLs:** Implemented custom routing for a professional user experience (e.g., `/shop` instead of `index.html`).
 
-
-
-\## 🚀 Features
-
-\- \*\*Fast Interface:\*\* Clean, dark-themed UI for gamers.
-
-\- \*\*Backend Logic:\*\* Powered by Node.js and Express.
-
-\- \*\*Data Persistence:\*\* Uses SQLite to store order history.
-
-\- \*\*Mock Payment:\*\* Simulates a real-world payment gateway transaction.
-
-
-
-\## 🛠️ Tech Stack
-
-\- \*\*Frontend:\*\* HTML5, CSS3, JavaScript (ES6)
-
-\- \*\*Backend:\*\* Node.js, Express.js
-
-\- \*\*Database:\*\* SQLite3
-
-
-
-\## ⚙️ Installation \& Setup
-
-1\. Clone the repository.
-
-2\. Install dependencies:
-
-&#x20;  ```bash
-
-&#x20;  npm install
-
+## 🛠️ Tech Stack
+- **Frontend:** HTML5, CSS3, JavaScript (ES6)
+- **Backend:
