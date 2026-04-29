@@ -70,7 +70,7 @@ func main() {
 	store := cookie.NewStore([]byte("super-secret-gaming-key"))
 	r.Use(sessions.Sessions("mysession", store))
 
-	r.Static("/static", "./public")
+	r.Static("/public", "./public")
 	r.StaticFile("/", "./public/home.html")
 	r.StaticFile("/login", "./public/login.html")
 	r.StaticFile("/register", "./public/register.html")
